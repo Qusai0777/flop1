@@ -1,2 +1,0 @@
-# intsem2result
-intsemresult

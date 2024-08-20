@@ -1,6 +1,15 @@
+// Function to generate a 5-digit code
+function generateCode() {
+    return Math.floor(10000 + Math.random() * 90000).toString();
+}
+
 document.getElementById('hostButton').addEventListener('click', function() {
     // Generate a random 5-digit code
-    let blockCode = Math.floor(10000 + Math.random() * 90000);
+    let blockCode = generateCode();
+    
+    // Save the block code in localStorage so other devices can access it
+    localStorage.setItem('blockCode', blockCode);
+
     // Display the block code in the host section
     document.getElementById('blockCode').innerText = blockCode;
 
@@ -17,7 +26,9 @@ document.getElementById('joinButton').addEventListener('click', function() {
 
 document.getElementById('joinSubmit').addEventListener('click', function() {
     let inputCode = document.getElementById('joinCode').value;
-    let blockCode = document.getElementById('blockCode').innerText;
+
+    // Get the block code from localStorage
+    let blockCode = localStorage.getItem('blockCode');
 
     if (inputCode === blockCode) {
         document.getElementById('joinStatus').innerText = "Successfully Joined!";
